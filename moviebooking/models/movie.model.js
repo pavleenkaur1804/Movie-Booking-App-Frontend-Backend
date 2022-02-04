@@ -1,9 +1,10 @@
 module.exports=mongoose=>{
     const Movie=mongoose.model(
         "movie",mongoose.Schema({
-            movieid:{type:String,require:true},
+            movieid:{type:Number,require:true},
             title:String,
             published:Boolean,
+            released:Boolean,
             poster_url:String,
             release_date:String,
             publish_date:String,

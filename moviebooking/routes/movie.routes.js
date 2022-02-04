@@ -1,15 +1,15 @@
 module.exports = (app) => {
-   
+    const movies = require("../controllers/movie.controller");
     var router = require("express").Router();
-  
-    //Retrieve  All Movies
-    router.get("/movies", (req,res)=>{
-        res.send("All Movies Data in JSON format from Mongo DB")
-    });
-  
-    
-    
    
-    app.use("/", router);
+   //Retrieve all Movies
+    router.get("/movies", movies.findAllMovies);
+  
+   
+  
+    //Retrieve movies by ID
+    router.get("/movies/:movieId",movies.findOne);
+
+    app.use("/api", router);
   };
   

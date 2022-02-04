@@ -1,7 +1,7 @@
 module.exports=mongoose=>{
     const Artist=mongoose.model(
         "artist",mongoose.Schema({
-            artistid:{type:String,require:true},
+            artistid:{type:Number,require:true},
             first_name:String,
             last_name:String,
             wiki_url:String,

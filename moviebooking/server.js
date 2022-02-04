@@ -21,6 +21,9 @@ db.mongoose
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
+  app.get("/", (req, res) => {
+    res.json({ message: "Welcome to Upgrad Movie booking application development." });
+  });
 
 //Importing routes from specific route files
 require("./routes/movie.routes")(app);

@@ -1,15 +1,15 @@
 module.exports = (app) => {
-   
+    const genres = require("../controllers/genre.controller");
+    
+  
     var router = require("express").Router();
   
     //Retrieve  All Artists
-    router.get("/genres", (req,res)=>{
-        res.send("All Genres Data in JSON format from Mongo DB")
-    });
+    router.get("/genres", genres.findAllGenres);
   
     
     
    
-    app.use("/", router);
+    app.use("/api", router);
   };
   
