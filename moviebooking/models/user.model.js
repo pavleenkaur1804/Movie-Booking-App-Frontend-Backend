@@ -3,8 +3,8 @@ module.exports = mongoose => {
       "user",
       mongoose.Schema(
         {
-          userid: { type: String, require: true },
-          email: { type: String ,require},
+          userid: { type: Number, require: true },
+          email: { type: String ,require:true},
           first_name: { type: String, require: true, unique: true, dropDups: true },
           last_name: { type: String, require: true },
           username: { type: String} ,

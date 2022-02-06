@@ -1,3 +1,6 @@
+const auth=require('../controllers/auth');
+
+
 module.exports = (app) => {
     const movies = require("../controllers/movie.controller");
     var router = require("express").Router();

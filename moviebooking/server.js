@@ -1,8 +1,17 @@
 const express = require("express");
 bodyParser = require("body-parser");
 const db = require("./models");
-
 const app = express();
+
+
+const cors=require('cors');
+
+var corsOptions={
+  origin:"http://localhost:3000"
+}
+app.use(cors(corsOptions));
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,6 +40,7 @@ require("./routes/movie.routes")(app);
 require("./routes/artist.routes")(app);
 
 require("./routes/genre.routes")(app);
+require("./routes/user.routes")(app);
 const PORT = 9000;
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}.`);
