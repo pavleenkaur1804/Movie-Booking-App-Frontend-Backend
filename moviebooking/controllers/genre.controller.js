@@ -11,11 +11,11 @@ exports.findAllGenres = (req, res) => {
           genres: data,
           message: "genres fetch successfully.",
         })
-        .catch((err) => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occured while fetching the genres.",
-          });
-        });
+       }) 
+       .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occured while fetching the genres.",
+      });
     });
   };

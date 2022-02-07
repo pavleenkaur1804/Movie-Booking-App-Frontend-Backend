@@ -13,11 +13,12 @@ exports.findAllArtists = (req, res) => {
           artists: data,
           message: "artists fetch successfully.",
         })
-        .catch((err) => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occured while fetching the artists.",
-          });
-        });
+       
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occured while fetching the artists.",
+      });
     });
   };

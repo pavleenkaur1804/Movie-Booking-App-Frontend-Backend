@@ -75,13 +75,10 @@ exports.login = (req, res) => {
                         // console.log("my web token  is ->",user.accesstoken)
                         const uuid = uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
                         user.uuid = uuid;
-                        // console.log("my uuid===>>",user.uuid)
+                        console.log("my uuid===>>",user.uuid)
 
 
-                        res.json({
-                            userData: user,
-                            message: "Logged In Successfully.",
-                        });
+                        res.send(user);
                     })
                     .catch((err) => {
                         res.status(500).send({
@@ -99,7 +96,7 @@ exports.login = (req, res) => {
 
 exports.logout = (req, res) => {
     //Validate Request
-    if (!req.body.id) {
+    if (!req.body.uuid) {
         res.status(400).send({
             message: "Please provide user ID.",
         });
@@ -107,7 +104,7 @@ exports.logout = (req, res) => {
     }
 
     const update = { isLoggedIn: false };
-    User.findByIdAndUpdate(req.body.id, update)
+    User.findOneAndUpdate(req.body.uuid, update)
         .then((user) => {
             res.json({
                 userData: user,

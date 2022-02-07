@@ -6,10 +6,6 @@ module.exports = (app) => {
   
     //Retrieve  All Artists
     router.get("/genres", genres.findAllGenres);
-  
-    
-    
-   
     app.use("/api", router);
   };
   

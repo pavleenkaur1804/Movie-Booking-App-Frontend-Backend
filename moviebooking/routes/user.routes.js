@@ -17,6 +17,6 @@ module.exports = (app) => {
     router.get("/bookShow",users.bookShow);
          
   
-    app.use("/api", router);
+    app.use("/api/auth", router);
   };
   

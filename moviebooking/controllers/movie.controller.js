@@ -6,30 +6,25 @@ const Movie = db.movie;
 
 exports.findAllMovies = (req, res) => {
   // GET /movies
+  console.log("received request")
   if (req.query.status!=='Published' || req.query.status!=='Released') {
 
     Movie.find({}).then((data) => {
-      res
-        .status(200)
-        .send({
-          movies: data,
-          message: "Movies fetch successfully.",
-        }).catch((err) => {
+      res.send({movies:data})
+      console.log(data)
+        }) .catch((err) => {
           res.status(500).send({
             message:
               err.message || "Some error occured while fetching the movies.",
           });
-        });
     });
   }
   // GET /movies?status=PUBLISHED 
   else if (req.query.status == 'Published') {
     Movie.find({ published: true })
       .then((data) => {
-        res.status(200).send({
-          movies: data,
-          message: "Movie fetch successfully.",
-        });
+        res.send({movies:JSON.stringify(data)})
+        console.log("GET /movies?status=PUBLISHED ",data)
       })
       .catch((err) => {
         res.status(500).send({
@@ -41,10 +36,7 @@ exports.findAllMovies = (req, res) => {
   else if (req.query.status == 'Released') {
     Movie.find({ released: true })
       .then((data) => {
-        res.status(200).send({
-          movies: data,
-          message: "Movie fetch successfully.",
-        });
+       res.send({movies:JSON.stringify(data)})
       })
       .catch((err) => {
         res.status(500).send({
@@ -61,29 +53,26 @@ exports.findAllMovies = (req, res) => {
           $and: [
             { released: true },
             { title: req.query.title },
-            { genres: req.query.genres },
-            { "artists.first_name": req.query.artists },
-            { release_date: req.query.start_date },
-            { publish_date: req.query.end_date }]
+            { genres: req.query.genres || null},
+            { "artists.first_name": req.query.artists || null},
+            { release_date: req.query.start_date || null},
+            { publish_date: req.query.end_date || null}]
         },
         {
           $and: [
             { released: true },
             { title: req.query.title },
-            { genres: req.query.genres },
-            { "artists.last_name": req.query.artists },
-            { release_date: req.query.start_date },
-            { publish_date: req.query.end_date }]
+            { genres: req.query.genres || null},
+            { "artists.last_name": req.query.artists|| null },
+            { release_date: req.query.start_date|| null },
+            { publish_date: req.query.end_date || null}]
         }]
 
       }
 
     )
       .then((data) => {
-        res.status(200).send({
-          movies: data,
-          message: "Movie fetch successfully.",
-        });
+        res.send(JSON.stringify(data))
       })
       .catch((err) => {
         res.status(500).send({
@@ -98,10 +87,7 @@ exports.findOne = (req, res) => {
   
   Movie.find({"movieid":req.params.movieId})
     .then((data) => {
-      res.status(200).send({
-        movie: data,
-        message: "Movie fetch successfully.",
-      });
+     res.json(data)
     })
     .catch((err) => {
       res.status(500).send({
@@ -115,10 +101,7 @@ exports.findShows = (req, res) => {
 
   Movie.findById(id)
     .then((data) => {
-      res.status(200).send({
-        shows: data.shows,
-        message: "Shows fetch successfully.",
-      });
+      res.json(data)
     })
     .catch((err) => {
       res.status(500).send({
